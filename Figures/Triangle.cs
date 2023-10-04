@@ -5,7 +5,7 @@ public class Triangle : FigureBase
     /// <summary>
     /// Lengths of triangle sides sorted in descending order
     /// </summary>
-    public double[] Sides { get; }
+    public IReadOnlyList<double> Sides { get; }
     /// <summary>
     /// Is the triangle right
     /// </summary>
@@ -15,8 +15,9 @@ public class Triangle : FigureBase
 
     public Triangle(double a, double b, double c)
     {
-        Sides = new double[] { a, b, c };
-        Array.Sort(Sides, (a, b) => b.CompareTo(a));
+        var tempArr = new double[] { a, b, c };
+        Array.Sort(tempArr, (a, b) => b.CompareTo(a));
+        Sides = tempArr;
 
         _isRight = new Lazy<bool>(CalculateIsRight);
 
